@@ -1,0 +1,53 @@
+body {
+  background: whitesmoke;
+}
+
+.container {
+  margin: 10% 20%;
+  width: 60%;
+  background-color: white;
+  border: 1px solid rgb(218, 216, 216);
+}
+
+.container p {
+  margin: 0;
+  padding: 0;
+  height: 30px;
+  padding-top: 10px;
+}
+
+i {
+  color: #757575;
+}
+
+.listItems {
+  height: 50px;
+  border-bottom: 1px solid rgb(218, 216, 216);
+  padding-left: 20px;
+  padding-right: 23px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.listItems:first-child {
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  padding-right: 20px;
+  align-items: center;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+
+.clear {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(244, 244, 244, 0.64);
+  color: gray;
+}
