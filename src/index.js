@@ -1,11 +1,20 @@
 import './styles.css';
 
-function component() {
-  const element = document.createElement('div');
-
-  element.classList.add('hello');
-
-  return element;
-}
-
-document.body.appendChild(component());
+// Array of the tasks' information
+const tasksInfo = [
+  {
+    description: 'Workout for 15 mins',
+    completed: false,
+    index: 0,
+  },
+  {
+    description: 'Workout for 15 mins',
+    completed: false,
+    index: 1,
+  },
+  {
+    description: 'Workout for 15 mins',
+    completed: false,
+    index: 2,
+  },
+];
