@@ -8,12 +8,12 @@ const tasksInfo = [
     index: 0,
   },
   {
-    description: 'Workout for 15 mins',
+    description: 'Take a walk with my dog',
     completed: false,
     index: 1,
   },
   {
-    description: 'Workout for 15 mins',
+    description: 'Coffee and Code',
     completed: false,
     index: 2,
   },
