@@ -1,23 +1,7 @@
 import './styles.css';
 
 // Array of the tasks' information
-const tasksInfo = [
-  {
-    description: 'Workout for 15 mins',
-    completed: false,
-    index: 0,
-  },
-  {
-    description: 'Take a walk with my dog',
-    completed: false,
-    index: 1,
-  },
-  {
-    description: 'Coffee and Code',
-    completed: false,
-    index: 2,
-  },
-];
+const tasksInfo = [];
 
 const tasksContainer = document.querySelector('.tasks');
 
