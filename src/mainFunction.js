@@ -9,16 +9,18 @@ export default class TaskList {
   }
 
   add = () => {
-    const description = addText.value;
-    const completed = false;
-    const index = 0;
-    const taskInfo = {
-      description,
-      completed,
-      index,
-    };
-    this.tasksInfo.push(taskInfo);
-    this.display();
+    if (addText.value) {
+      const description = addText.value;
+      const completed = false;
+      const index = 0;
+      const taskInfo = {
+        description,
+        completed,
+        index,
+      };
+      this.tasksInfo.push(taskInfo);
+      this.display();
+    }
   }
 
   display = () => {
