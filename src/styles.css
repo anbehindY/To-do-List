@@ -20,6 +20,10 @@ i {
   color: #757575;
 }
 
+.fa-trash-can {
+  display: none;
+}
+
 .listItems {
   height: 50px;
   border-bottom: 1px solid rgb(218, 216, 216);

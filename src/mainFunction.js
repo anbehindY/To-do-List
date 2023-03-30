@@ -24,13 +24,18 @@ export default class TaskList {
     }
   }
 
+  remove = () => {
+
+  }
+
   display = () => {
     //  Each item in the tasksInfo array passed through this function and a new array is created
     const task = this.tasksInfo.map(
       (info) => `<div class="listItems">
                 <label for="task${info.index}">
-                    <input id="task${info.index}" type="checkbox"> ${info.description}
-                </label>
+                <input id="task${info.index}" type="checkbox"> ${info.description}</label>
+                <i class="fa-solid fa-trash-can"></i>
+                <i class="fa-solid fa-ellipsis fa-rotate-90"></i>
                </div>`,
     );
 
