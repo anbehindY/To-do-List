@@ -19,6 +19,7 @@ export default class TaskList {
         index,
       };
       this.tasksInfo.push(taskInfo);
+      addText.value = '';
       this.display();
     }
   }
