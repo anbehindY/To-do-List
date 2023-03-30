@@ -22,10 +22,17 @@ export default class TaskList {
       addText.value = '';
       this.display();
     }
+    addBtn.addEventListener('click', this.add);
   }
 
   remove = () => {
-
+    tasksContainer.addEventListener('click', (event) => {
+      if (event.target.classList.contains('fa-trash-can')) {
+        const index = event.target.classList[1].split('-')[1];
+        this.tasksInfo.splice(index, 1);
+        this.display();
+      }
+    });
   }
 
   display = () => {
@@ -44,6 +51,7 @@ export default class TaskList {
   }
 
   render = () => {
-    addBtn.addEventListener('click', this.add);
+    this.remove();
+    this.add();
   }
 }
