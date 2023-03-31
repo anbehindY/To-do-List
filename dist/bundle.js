@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n\n\n// Array of the tasks' information\nconst tasksInfo = [\n  {\n    description: 'Workout for 15 mins',\n    completed: false,\n    index: 0,\n  },\n  {\n    description: 'Take a walk with my dog',\n    completed: false,\n    index: 1,\n  },\n  {\n    description: 'Coffee and Code',\n    completed: false,\n    index: 2,\n  },\n];\n\nconst tasksContainer = document.querySelector('.tasks');\n\n// Each item in the tasksInfo array passed through this function and a new array is created\nconst task = tasksInfo.map(\n  (taskInfo) => `<div class=\"listItems\">\n                <label for=\"task${taskInfo.index}\">\n                    <input id=\"task${taskInfo.index}\" type=\"checkbox\"> ${taskInfo.description}\n                </label>\n               </div>`,\n);\n\n// Each item in the array created by task function are joined and put inside the tasksContainer\ntasksContainer.innerHTML = task.join('');\n\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _styles_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./styles.css */ \"./src/styles.css\");\n/* harmony import */ var _mainFunction_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./mainFunction.js */ \"./src/mainFunction.js\");\n\n\n\n// Array of the tasks' information\nconst tasksInfo = [];\n\nconst tasksContainer = document.querySelector('.tasks');\n\n// Each item in the tasksInfo array passed through this function and a new array is created\nconst task = tasksInfo.map(\n  (taskInfo) => `<div class=\"listItems\">\n                <label for=\"task${taskInfo.index}\">\n                    <input id=\"task${taskInfo.index}\" type=\"checkbox\"> ${taskInfo.description}\n                </label>\n               </div>`,\n);\n\n// Each item in the array created by task function are joined and put inside the tasksContainer\ntasksContainer.innerHTML = task.join('');\n\nconst taskList = new _mainFunction_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"]();\ndocument.querySelector('.enter').addEventListener('click', () => tasksInfo.push(taskList.add));\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/mainFunction.js":
+/*!*****************************!*\
+  !*** ./src/mainFunction.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ TaskList)\n/* harmony export */ });\nclass TaskList {\n  constructor() {\n    this.description = '';\n    this.completed = false;\n    this.index = 0;\n  }\n\n  add = () => {\n    const newTask = new TaskList();\n    this.description = document.getElementById('starter').value;\n    this.index += 1;\n    console.log(newTask);\n  }\n}\n\n\n//# sourceURL=webpack://to-do-list/./src/mainFunction.js?");
 
 /***/ })
 
