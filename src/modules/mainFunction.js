@@ -89,13 +89,13 @@ class TaskList {
         const id = parseInt(checkbox.closest('.taskItems').id.split('-')[1], 10);
         const taskIndex = this.tasksInfo.findIndex((task) => task.index === id);
         this.tasksInfo[taskIndex].completed = checkbox.checked;
-        this.saveTasks();
         const infoTask = checkbox.closest('.taskItems').querySelector('.infoTask');
         if (checkbox.checked) {
           infoTask.style.textDecoration = 'line-through';
         } else {
           infoTask.style.textDecoration = 'none';
         }
+        this.saveTasks();
       });
     });
   }
@@ -117,7 +117,7 @@ class TaskList {
     this.display();
     this.edit();
     this.checkStatus();
-    this.deleteCompletedTasks();
+    // this.deleteCompletedTasks();
   }
 }
 
