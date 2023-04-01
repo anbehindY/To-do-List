@@ -1,3 +1,5 @@
+import checkStatus from './statusChecker.js';
+
 class TaskList {
   constructor() {
     this.tasksContainer = document.querySelector('.tasks');
@@ -7,6 +9,18 @@ class TaskList {
     this.taskKey = 'key';
     const storedTasks = JSON.parse(localStorage.getItem(this.taskKey));
     this.tasksInfo = storedTasks || [];
+
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.add();
+    });
+
+    this.addBtn.addEventListener('click', this.add.bind(this));
+
+    const deleteCompletedBtn = document.querySelector('.clear');
+    deleteCompletedBtn.addEventListener('click', () => {
+      this.deleteCompletedTasks();
+    });
   }
 
   display = () => {
@@ -36,14 +50,9 @@ class TaskList {
       this.addText.value = '';
       taskInfo.index += this.tasksInfo.length;
       this.display();
-      this.checkStatus();
+      checkStatus(this.tasksInfo, this.saveTasks.bind(this));
       this.saveTasks();
     }
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.add();
-    });
-    this.addBtn.addEventListener('click', this.add.bind(this));
   }
 
   remove() {
@@ -54,7 +63,7 @@ class TaskList {
           if (this.tasksInfo[i].index === id) {
             this.tasksInfo.splice(i, 1);
             this.display();
-            this.checkStatus();
+            checkStatus(this.tasksInfo, this.saveTasks.bind(this));
             this.saveTasks();
           }
         }
@@ -75,40 +84,18 @@ class TaskList {
             this.tasksInfo[taskIndex].description = newDescription;
           }
           this.display();
-          this.checkStatus();
+          checkStatus(this.tasksInfo, this.saveTasks.bind(this));
           this.saveTasks();
         });
       }
     });
   }
 
-  checkStatus = () => {
-    const checkboxes = document.querySelectorAll('.checkbox');
-    checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener('change', () => {
-        const id = parseInt(checkbox.closest('.taskItems').id.split('-')[1], 10);
-        const taskIndex = this.tasksInfo.findIndex((task) => task.index === id);
-        this.tasksInfo[taskIndex].completed = checkbox.checked;
-        const infoTask = checkbox.closest('.taskItems').querySelector('.infoTask');
-        if (checkbox.checked) {
-          infoTask.style.textDecoration = 'line-through';
-        } else {
-          infoTask.style.textDecoration = 'none';
-        }
-        this.saveTasks();
-      });
-    });
-  }
-
   deleteCompletedTasks() {
     this.tasksInfo = this.tasksInfo.filter((task) => !task.completed);
     this.display();
-    this.checkStatus();
+    checkStatus(this.tasksInfo, this.saveTasks.bind(this));
     this.saveTasks();
-    const deleteCompletedBtn = document.querySelector('.clear');
-    deleteCompletedBtn.addEventListener('click', () => {
-      this.deleteCompletedTasks();
-    });
   }
 
   render() {
@@ -116,7 +103,7 @@ class TaskList {
     this.remove();
     this.display();
     this.edit();
-    this.checkStatus();
+    checkStatus(this.tasksInfo, this.saveTasks.bind(this));
   }
 }
 
