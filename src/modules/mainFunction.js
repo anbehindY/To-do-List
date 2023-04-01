@@ -1,3 +1,5 @@
+import checkStatus from './statusChecker.js';
+
 class TaskList {
   constructor() {
     this.tasksContainer = document.querySelector('.tasks');
@@ -5,21 +7,33 @@ class TaskList {
     this.addText = document.querySelector('#starter');
     this.form = document.querySelector('form');
     this.taskKey = 'key';
-    this.tasksInfo = [] || JSON.parse(localStorage.getItem(this.taskKey));
-    this.render();
+    const storedTasks = JSON.parse(localStorage.getItem(this.taskKey));
+    this.tasksInfo = storedTasks || [];
+
+    this.form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      this.add();
+    });
+
+    this.addBtn.addEventListener('click', this.add.bind(this));
+
+    const deleteCompletedBtn = document.querySelector('.clear');
+    deleteCompletedBtn.addEventListener('click', () => {
+      this.deleteCompletedTasks();
+    });
   }
 
-  display() {
+  display = () => {
     const task = this.tasksInfo.map(
       (info) => `<div class="taskItems" id="div-${info.index}">
-                      <i id="task-${info.index}" class="fa-regular fa-square"></i>
-                      <input class='infoTask' type="text" id="infoTask" data-index="${info.index}" name="description" value="${info.description}" />
-                      <i class="fa-solid fa-trash-can" data-index="${info.index}"></i>
-                      <i class="fa-solid fa-ellipsis fa-rotate-90"></i>
-                    </div>`,
+      <input type="checkbox" class="checkbox" ${info.completed ? 'checked' : ''} />
+      <input class='infoTask ${info.completed ? 'true' : ''}' type="text" id="infoTask" data-index="${info.index}" name="description" value="${info.description}" />
+      <i class="fa-solid fa-trash-can" data-index="${info.index}"></i>
+      <i class="fa-solid fa-ellipsis fa-rotate-90"></i>
+    </div>`,
     );
     this.tasksContainer.innerHTML = task.join('');
-  }
+  };
 
   saveTasks() {
     localStorage.setItem(this.taskKey, JSON.stringify(this.tasksInfo));
@@ -36,13 +50,9 @@ class TaskList {
       this.addText.value = '';
       taskInfo.index += this.tasksInfo.length;
       this.display();
+      checkStatus(this.tasksInfo, this.saveTasks.bind(this));
       this.saveTasks();
     }
-    this.form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      this.add();
-    });
-    this.addBtn.addEventListener('click', this.add.bind(this));
   }
 
   remove() {
@@ -53,6 +63,7 @@ class TaskList {
           if (this.tasksInfo[i].index === id) {
             this.tasksInfo.splice(i, 1);
             this.display();
+            checkStatus(this.tasksInfo, this.saveTasks.bind(this));
             this.saveTasks();
           }
         }
@@ -64,19 +75,27 @@ class TaskList {
     this.tasksContainer.addEventListener('click', (e) => {
       const taskItem = e.target.closest('.taskItems');
       if (taskItem) {
-        const infoTask = taskItem.querySelector('.infoTask');
-        infoTask.addEventListener('blur', () => {
-          const newDescription = infoTask.value.trim();
+        const descriptionElement = taskItem.querySelector('.infoTask');
+        descriptionElement.addEventListener('blur', () => {
+          const newDescription = descriptionElement.value.trim();
           if (newDescription) {
-            const id = parseInt(infoTask.dataset.index, 10);
+            const id = parseInt(descriptionElement.dataset.index, 10);
             const taskIndex = this.tasksInfo.findIndex((task) => task.index === id);
             this.tasksInfo[taskIndex].description = newDescription;
           }
           this.display();
+          checkStatus(this.tasksInfo, this.saveTasks.bind(this));
           this.saveTasks();
         });
       }
     });
+  }
+
+  deleteCompletedTasks() {
+    this.tasksInfo = this.tasksInfo.filter((task) => !task.completed);
+    this.display();
+    checkStatus(this.tasksInfo, this.saveTasks.bind(this));
+    this.saveTasks();
   }
 
   render() {
@@ -84,6 +103,7 @@ class TaskList {
     this.remove();
     this.display();
     this.edit();
+    checkStatus(this.tasksInfo, this.saveTasks.bind(this));
   }
 }
 
