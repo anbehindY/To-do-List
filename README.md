@@ -50,7 +50,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [<a href="https://anbehindy.github.io/To-do-List/" target="_blank">Live version</a>](#)
+- [<a href="https://anbehindy.github.io/To-do-List/dist" target="_blank">Live version</a>](#)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
