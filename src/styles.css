@@ -61,9 +61,9 @@ i {
   background: #fffeca;
 }
 
-div.taskItems input.infoTask.true{
+div.taskItems input.infoTask.true {
   text-decoration: line-through !important;
-}  
+}
 
 input {
   border: none;
