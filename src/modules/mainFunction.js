@@ -85,7 +85,7 @@ class TaskList {
   checkStatus = () => {
     const checkboxes = document.querySelectorAll('.checkbox');
     checkboxes.forEach((checkbox) => {
-      checkbox.addEventListener('click', () => {
+      checkbox.addEventListener('change', () => {
         const id = parseInt(checkbox.closest('.taskItems').id.split('-')[1], 10);
         const taskIndex = this.tasksInfo.findIndex((task) => task.index === id);
         this.tasksInfo[taskIndex].completed = checkbox.checked;
@@ -117,7 +117,6 @@ class TaskList {
     this.display();
     this.edit();
     this.checkStatus();
-    // this.deleteCompletedTasks();
   }
 }
 
